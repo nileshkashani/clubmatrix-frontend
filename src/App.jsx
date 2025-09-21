@@ -8,7 +8,7 @@ import Clubs from './components/Clubs';
 import AddClub from './components/AddClub';
 import LeaderDashboard from './components/LeaderDashboard';
 import JoinedClubs from './components/JoinedClubs';
-import About from './components/about';
+import About from './components/About';
  
 
 const App = () => {
