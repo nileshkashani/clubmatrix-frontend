@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app-container font-sans">
+      <div className="app-container font-poppins">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
