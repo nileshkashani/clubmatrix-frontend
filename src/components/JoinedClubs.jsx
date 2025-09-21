@@ -13,7 +13,15 @@ const JoinedClubs = () => {
     const fetchJoinedClubs = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
-        const email = user.user.email;
+        let email;
+        if (!user) {
+          setMessage({ type: "error", text: "No user email found." });
+          setLoading(false);
+          return;
+        }
+        else{
+          email = user.email;          
+        }
 
         const res = await axios.get("http://localhost:8080/member/email", {
           params: { email },
