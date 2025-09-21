@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app-container">
+      <div className="app-container font-robomono">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
