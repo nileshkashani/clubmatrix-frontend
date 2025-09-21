@@ -7,6 +7,7 @@ const JoinedClubs = () => {
   const [clubMembers, setClubMembers] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [message, setMessage] = useState({ type: "", text: "" });
+  const [loading, setLoading] = useState(true); // ✅ track loading
 
   useEffect(() => {
     const fetchJoinedClubs = async () => {
@@ -21,7 +22,8 @@ const JoinedClubs = () => {
         if (res.data.success) {
           const memberArray = Array.isArray(res.data.data)
             ? res.data.data
-            : [res.data.data];
+            : [res.data.data].filter(Boolean);
+
           setMembers(memberArray);
 
           if (memberArray[0]?.club) {
@@ -31,11 +33,14 @@ const JoinedClubs = () => {
       } catch (err) {
         console.error("Error fetching joined clubs:", err);
         setMessage({ type: "error", text: "Failed to load joined clubs." });
+      } finally {
+        setLoading(false); // ✅ finished loading
       }
     };
 
     fetchJoinedClubs();
   }, []);
+
 
   useEffect(() => {
     if (!selectedClub) return;
@@ -66,7 +71,19 @@ const JoinedClubs = () => {
     setSelectedClub(club);
   };
 
-  if (!members.length) return <p className="text-white text-center mt-10">Loading...</p>;
+   if (loading) return <p className="text-white text-center mt-10">Loading...</p>;
+
+  if (!members.length) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#0d1117] text-white">
+        <div className="bg-[#161b22] p-8 rounded-2xl shadow-md text-center">
+          <h2 className="text-2xl font-bold mb-2">No Clubs Found</h2>
+          <p className="text-gray-400">You haven’t joined any clubs yet.</p>
+        </div>
+      </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#0d1117] text-white">
