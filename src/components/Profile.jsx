@@ -14,7 +14,8 @@ const Profile = () => {
     } else {
       const fetchUser = async () => {
         try {
-          const res = await axios.get("http://localhost:8080/login/current");
+          
+          const res = localStorage.getItem("user");
           if (res.data?.user) {
             setUser(res.data.user);
           } else {
