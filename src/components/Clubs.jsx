@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const Clubs = () => {
+  const navigate = useNavigate();
+
   const [clubs, setClubs] = useState([]);
   const [joinedClubs, setJoinedClubs] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -75,6 +79,14 @@ const Clubs = () => {
 
   return (
     <div className="min-h-screen bg-[#0d1117] p-6 text-white">
+      <div className="max-w-6xl mx-auto mb-6">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center text-blue-400 hover:text-blue-600 mb-4"
+        >
+          ← Back
+        </button>
+      </div>
       <h1 className="text-3xl font-bold text-blue-500 mb-8 text-center">
         Explore Clubs
       </h1>
@@ -160,11 +172,10 @@ const Clubs = () => {
                 </div>
                 {messages[club.id] && (
                   <div
-                    className={`mb-2 p-2 rounded-md text-sm ${
-                      messages[club.id].type === "success"
+                    className={`mb-2 p-2 rounded-md text-sm ${messages[club.id].type === "success"
                         ? "bg-green-600 text-white"
                         : "bg-red-600 text-white"
-                    }`}
+                      }`}
                   >
                     {messages[club.id].text}
                   </div>

@@ -60,6 +60,12 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0d1117] px-4">
       <div className="w-full max-w-md bg-[#161b22] rounded-2xl shadow-xl p-8 text-white">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center text-blue-400 hover:text-blue-600 mb-4"
+        >
+          ← Back
+        </button>
         <h1 className="text-3xl font-extrabold text-center mb-6 tracking-wide">
           Login to <span className="text-blue-500">Club Matrix</span>
         </h1>
@@ -67,11 +73,10 @@ const Login = () => {
         {/* Tabs */}
         <div className="flex justify-center mb-6 space-x-4">
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              selectedMethod === "password"
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "password"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+              }`}
             onClick={() => {
               setSelectedMethod("password");
               setMessage({ type: "", text: "" });
@@ -81,11 +86,10 @@ const Login = () => {
             Password
           </button>
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              selectedMethod === "otp"
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "otp"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+              }`}
             onClick={() => {
               setSelectedMethod("otp");
               setMessage({ type: "", text: "" });
@@ -99,9 +103,8 @@ const Login = () => {
         {/* Message */}
         {message.text && (
           <div
-            className={`mb-4 p-3 rounded-md text-center font-medium ${
-              message.type === "success" ? "bg-green-600" : "bg-red-600"
-            }`}
+            className={`mb-4 p-3 rounded-md text-center font-medium ${message.type === "success" ? "bg-green-600" : "bg-red-600"
+              }`}
           >
             {message.text}
           </div>

@@ -9,12 +9,12 @@ const Profile = () => {
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      setUser(JSON.parse(storedUser).user); 
+      setUser(JSON.parse(storedUser).user);
       setLoading(false);
     } else {
       const fetchUser = async () => {
         try {
-          
+
           const res = localStorage.getItem("user");
           if (res.data?.user) {
             setUser(res.data.user);
@@ -55,6 +55,13 @@ const Profile = () => {
   return (
     <div className="flex justify-center items-start min-h-screen bg-[#0d1117] py-8 px-4">
       <div className="w-full max-w-md bg-[#161b22] shadow-xl rounded-2xl p-6 md:p-8 text-white">
+        <button
+          onClick={() => window.history.back()}
+          className="flex items-center text-blue-400 hover:text-blue-600 mb-4"
+        >
+          ← Back
+        </button>
+
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Profile</h2>
 
         <div className="space-y-4">

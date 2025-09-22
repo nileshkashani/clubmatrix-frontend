@@ -72,15 +72,20 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0d1117] px-4">
       <div className="w-full max-w-md bg-[#161b22] rounded-2xl shadow-xl p-8 text-white">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center text-blue-400 hover:text-blue-600 mb-4"
+        >
+          ← Back
+        </button>
         <h1 className="text-3xl font-extrabold text-center mb-6 tracking-wide">
           Register to <span className="text-blue-500">Club Matrix</span>
         </h1>
 
         {message.text && (
           <div
-            className={`p-3 mb-4 rounded-md text-center font-medium ${
-              message.type === "success" ? "bg-green-600" : "bg-red-600"
-            }`}
+            className={`p-3 mb-4 rounded-md text-center font-medium ${message.type === "success" ? "bg-green-600" : "bg-red-600"
+              }`}
           >
             {message.text}
           </div>
@@ -113,9 +118,8 @@ const Register = () => {
             <button
               type="submit"
               disabled={isSendingOtp}
-              className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-                isSendingOtp ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
-              }`}
+              className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${isSendingOtp ? "bg-gray-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"
+                }`}
             >
               {isSendingOtp ? "Sending OTP..." : "Send OTP"}
             </button>

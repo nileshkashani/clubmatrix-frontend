@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Users, Bell, ClipboardList, Info } from "lucide-react";
+import { Users, Bell, ClipboardList, Info, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LeaderDashboard = () => {
+  const navigate = useNavigate(); // <-- add this
   const [activeTab, setActiveTab] = useState("club");
   const [joinRequests, setJoinRequests] = useState([]);
   const [members, setMembers] = useState([]);
@@ -150,11 +152,10 @@ const LeaderDashboard = () => {
             <button
               key={tab.key}
               onClick={tab.handler}
-              className={`flex items-center w-full p-2 rounded-md transition ${
-                activeTab === tab.key
+              className={`flex items-center w-full p-2 rounded-md transition ${activeTab === tab.key
                   ? "bg-blue-600 text-white"
                   : "hover:bg-blue-700/30 text-gray-200"
-              }`}
+                }`}
             >
               <tab.icon className="w-5 h-5 mr-2" />
               {tab.label}
@@ -165,15 +166,24 @@ const LeaderDashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6 overflow-y-auto space-y-6">
+        {/* Back button */}
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center text-blue-400 hover:text-blue-600 mb-4"
+        >
+          <ArrowLeft className="w-5 h-5 mr-2" />
+          Back
+        </button>
+
         {message.text && (
           <div
-            className={`p-3 rounded-md text-sm ${
-              message.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
-            }`}
+            className={`p-3 rounded-md text-sm ${message.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
+              }`}
           >
             {message.text}
           </div>
         )}
+
 
         {activeTab === "club" && club && (
           <div className="bg-[#161b22] p-6 rounded-2xl shadow-md space-y-2">

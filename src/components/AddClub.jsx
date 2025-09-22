@@ -64,14 +64,22 @@ const AddClub = () => {
 
   return (
     <div className="min-h-screen bg-[#0d1117] flex items-center justify-center p-4">
+
       <div className="w-full max-w-lg bg-[#161b22] rounded-2xl shadow-xl p-6 md:p-8 text-white">
+        <div className="mb-4">
+          <button
+            onClick={() => navigate("/")}
+            className="flex items-center text-blue-400 hover:text-blue-600"
+          >
+            ← Back
+          </button>
+        </div>
         <h2 className="text-2xl font-bold mb-6 text-center">Add New Club</h2>
 
         {message && (
           <div
-            className={`mb-6 p-3 rounded-md text-center font-medium ${
-              message.type === "success" ? "bg-green-600" : "bg-red-600"
-            }`}
+            className={`mb-6 p-3 rounded-md text-center font-medium ${message.type === "success" ? "bg-green-600" : "bg-red-600"
+              }`}
           >
             {message.text}
           </div>

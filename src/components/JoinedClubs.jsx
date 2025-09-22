@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const JoinedClubs = () => {
+  const navigate = useNavigate();
+
   const [members, setMembers] = useState([]);
   const [selectedClub, setSelectedClub] = useState(null);
   const [clubMembers, setClubMembers] = useState([]);
@@ -13,15 +17,13 @@ const JoinedClubs = () => {
     const fetchJoinedClubs = async () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
-        let email;
         if (!user) {
           setMessage({ type: "error", text: "No user email found." });
           setLoading(false);
           return;
         }
-        else{
-          email = user.email;          
-        }
+        const email = user.user.email; // ✅ access nested user object
+
 
         const res = await axios.get("http://localhost:8080/member/email", {
           params: { email },
@@ -79,7 +81,7 @@ const JoinedClubs = () => {
     setSelectedClub(club);
   };
 
-   if (loading) return <p className="text-white text-center mt-10">Loading...</p>;
+  if (loading) return <p className="text-white text-center mt-10">Loading...</p>;
 
   if (!members.length) {
     return (
@@ -108,11 +110,10 @@ const JoinedClubs = () => {
                   <button
                     key={m.memberId}
                     onClick={() => handleSelectClub(m.club)}
-                    className={`flex items-center w-full p-2 rounded-md transition ${
-                      selectedClub?.id === m.club.id
-                        ? "bg-blue-600 text-white"
-                        : "hover:bg-blue-700/30 text-gray-200"
-                    }`}
+                    className={`flex items-center w-full p-2 rounded-md transition ${selectedClub?.id === m.club.id
+                      ? "bg-blue-600 text-white"
+                      : "hover:bg-blue-700/30 text-gray-200"
+                      }`}
                   >
                     {m.club.clubName}
                   </button>
@@ -124,11 +125,16 @@ const JoinedClubs = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6 overflow-y-auto">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 px-4 py-2 bg-transparent text-blue-400 rounded-md text-white font-medium transition"
+        >
+          &larr; Back
+        </button>
         {message.text && (
           <div
-            className={`p-3 mb-4 rounded-md text-sm ${
-              message.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
-            }`}
+            className={`p-3 mb-4 rounded-md text-sm ${message.type === "success" ? "bg-green-600 text-white" : "bg-red-600 text-white"
+              }`}
           >
             {message.text}
           </div>
