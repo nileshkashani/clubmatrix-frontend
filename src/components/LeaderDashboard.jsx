@@ -3,7 +3,7 @@ import { Users, Bell, ClipboardList, Info } from "lucide-react";
 import axios from "axios";
 
 const LeaderDashboard = () => {
-  const [activeTab, setActiveTab] = useState("requests");
+  const [activeTab, setActiveTab] = useState("club");
   const [joinRequests, setJoinRequests] = useState([]);
   const [members, setMembers] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
@@ -132,7 +132,7 @@ const LeaderDashboard = () => {
   };
 
   useEffect(() => {
-    handleTabRequests();
+    handleTabClubDetails();
   }, []);
 
   return (
