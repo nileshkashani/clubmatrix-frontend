@@ -21,7 +21,7 @@ const Home = () => {
         }
 
         const leaderId = user.user.id;
-        const res = await axios.get(`http://localhost:8080/club/get/by/leader/${leaderId}`);
+        const res = await axios.get(`https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${leaderId}`);
 
         if (res.data) {
           setIsClubLeader(true);

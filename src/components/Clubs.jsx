@@ -17,11 +17,11 @@ const Clubs = () => {
   useEffect(() => {
     const fetchClubs = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/club/getall");
+        const res = await axios.get("https://cm-backend-production-642e.up.railway.app/club/getall");
         setClubs(res.data);
 
         if (user) {
-          const joinedRes = await axios.get("http://localhost:8080/member/email", {
+          const joinedRes = await axios.get("https://cm-backend-production-642e.up.railway.app/member/email", {
             params: { email: user.user.email },
           });
           if (joinedRes.data.success) {
@@ -59,7 +59,7 @@ const Clubs = () => {
     }
     try {
       const res = await axios.post(
-        `http://localhost:8080/join/request/${clubId}/${user.user.id}`
+        `https://cm-backend-production-642e.up.railway.app/join/request/${clubId}/${user.user.id}`
       );
       setMessages((prev) => ({
         ...prev,

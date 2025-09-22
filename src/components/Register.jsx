@@ -21,7 +21,7 @@ const Register = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.post("http://localhost:8080/login/send/otp", { email });
+      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { email });
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         setStep(2);
@@ -39,7 +39,7 @@ const Register = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.post("http://localhost:8080/login/verify/otp", { email, otp });
+      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { email, otp });
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         setStep(3);
@@ -56,7 +56,7 @@ const Register = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.post("http://localhost:8080/login/register", { name, email, password, phone });
+      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/register", { name, email, password, phone });
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         localStorage.setItem("isAuthenticated", "true");

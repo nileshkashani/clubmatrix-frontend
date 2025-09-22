@@ -20,7 +20,7 @@ const LeaderDashboard = () => {
     setActiveTab("club");
     try {
       const res = await axios.get(
-        `http://localhost:8080/club/get/by/leader/${leaderId}`
+        `https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${leaderId}`
       );
       setClub(res.data || null);
     } catch (err) {
@@ -34,7 +34,7 @@ const LeaderDashboard = () => {
     setActiveTab("requests");
     try {
       const res = await axios.get(
-        `http://localhost:8080/join/requests/leader/${leaderId}`
+        `https://cm-backend-production-642e.up.railway.app/join/requests/leader/${leaderId}`
       );
       setJoinRequests(res.data.data || []);
     } catch (err) {
@@ -48,7 +48,7 @@ const LeaderDashboard = () => {
     setActiveTab("members");
     try {
       const res = await axios.get(
-        `http://localhost:8080/club/members/leader/${leaderId}`
+        `https://cm-backend-production-642e.up.railway.app/club/members/leader/${leaderId}`
       );
       setMembers(res.data.data || []);
     } catch (err) {
@@ -62,13 +62,13 @@ const LeaderDashboard = () => {
     setActiveTab("announcements");
     try {
       const clubRes = await axios.get(
-        `http://localhost:8080/club/get/by/leader/${leaderId}`
+        `https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${leaderId}`
       );
       const id = clubRes.data.id;
       setClub(clubRes.data);
 
       const res = await axios.get(
-        `http://localhost:8080/announcement/get/all/${id}`
+        `https://cm-backend-production-642e.up.railway.app/announcement/get/all/${id}`
       );
       setAnnouncements(res.data.data || []);
     } catch (err) {
@@ -82,8 +82,8 @@ const LeaderDashboard = () => {
   const handleApprove = async (request) => {
     try {
       const clubId = request.club.id;
-      await axios.post(`http://localhost:8080/member/add/${clubId}`, request.user);
-      await axios.delete(`http://localhost:8080/join/delete/${request.id}`);
+      await axios.post(`https://cm-backend-production-642e.up.railway.app/member/add/${clubId}`, request.user);
+      await axios.delete(`https://cm-backend-production-642e.up.railway.app/join/delete/${request.id}`);
       setMessage({ type: "success", text: `Approved ${request.user.name}!` });
       handleTabRequests();
       handleTabMembers();
@@ -95,7 +95,7 @@ const LeaderDashboard = () => {
 
   const handleReject = async (requestId) => {
     try {
-      await axios.delete(`http://localhost:8080/join/delete/${requestId}`);
+      await axios.delete(`https://cm-backend-production-642e.up.railway.app/join/delete/${requestId}`);
       setMessage({ type: "success", text: "Join request rejected!" });
       handleTabRequests();
     } catch (err) {
@@ -106,7 +106,7 @@ const LeaderDashboard = () => {
 
   const handleRemove = async (memberId) => {
     try {
-      await axios.delete(`http://localhost:8080/member/delete/${memberId}`);
+      await axios.delete(`https://cm-backend-production-642e.up.railway.app/member/delete/${memberId}`);
       setMessage({ type: "success", text: "Member removed!" });
       handleTabMembers();
     } catch (err) {
@@ -120,7 +120,7 @@ const LeaderDashboard = () => {
     const title = e.target.title.value;
     const description = e.target.description.value;
     try {
-      await axios.post(`http://localhost:8080/announcement/add/${club.id}`, {
+      await axios.post(`https://cm-backend-production-642e.up.railway.app/announcement/add/${club.id}`, {
         announcementTitle: title,
         announcementDescription: description,
       });

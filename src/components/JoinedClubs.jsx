@@ -25,7 +25,7 @@ const JoinedClubs = () => {
         const email = user.user.email; // ✅ access nested user object
 
 
-        const res = await axios.get("http://localhost:8080/member/email", {
+        const res = await axios.get("https://cm-backend-production-642e.up.railway.app/member/email", {
           params: { email },
         });
 
@@ -58,12 +58,12 @@ const JoinedClubs = () => {
     const fetchClubData = async () => {
       try {
         const membersRes = await axios.get(
-          `http://localhost:8080/member/club/${selectedClub.id}`
+          `https://cm-backend-production-642e.up.railway.app/member/club/${selectedClub.id}`
         );
         setClubMembers(membersRes.data.data || []);
 
         const announcementsRes = await axios.get(
-          `http://localhost:8080/announcement/get/all/${selectedClub.id}`
+          `https://cm-backend-production-642e.up.railway.app/announcement/get/all/${selectedClub.id}`
         );
         setAnnouncements(announcementsRes.data.data || []);
       } catch (err) {

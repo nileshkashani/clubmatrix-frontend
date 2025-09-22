@@ -15,11 +15,11 @@ const Login = () => {
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/login/password", { email, password });
+      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/password", { email, password });
       if (res.data.success) {
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
-        const clubRes = await axios.get(`http://localhost:8080/club/get/by/leader/${res.data.user.id}`);
+        const clubRes = await axios.get(`https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${res.data.user.id}`);
         navigate(clubRes.data ? "/dashboard" : "/");
       } else setMessage({ type: "error", text: "Invalid email or password" });
     } catch (err) {
@@ -31,7 +31,7 @@ const Login = () => {
   const handleRequestOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/login/send/otp", { email });
+      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { email });
       if (res.data.success) {
         setMessage({ type: "success", text: "OTP sent successfully! Check your email." });
         setOtpRequested(true);
@@ -45,7 +45,7 @@ const Login = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/login/verify/otp", { email, otp });
+      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { email, otp });
       if (res.data.success) {
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");

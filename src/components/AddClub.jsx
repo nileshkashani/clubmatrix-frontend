@@ -27,7 +27,7 @@ const AddClub = () => {
       };
 
       const clubRes = await axios.post(
-        `http://localhost:8080/club/add/${leaderId}`,
+        `https://cm-backend-production-642e.up.railway.app/club/add/${leaderId}`,
         clubData
       );
 
@@ -40,7 +40,7 @@ const AddClub = () => {
         address: user.user.address || "",
       };
 
-      await axios.post(`http://localhost:8080/member/add/${newClub.id}`, userLogin);
+      await axios.post(`https://cm-backend-production-642e.up.railway.app/member/add/${newClub.id}`, userLogin);
 
       setMessage({ type: "success", text: "Club created and leader added successfully!" });
 
