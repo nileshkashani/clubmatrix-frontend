@@ -39,7 +39,10 @@ const Register = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { email, otp });
+      const response = await axios.post(
+        "https://cm-backend-production-642e.up.railway.app/login/verify/otp",
+        { phone, otp }   // <-- use phone + otp
+      );
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         setStep(3);
@@ -50,6 +53,7 @@ const Register = () => {
       setMessage({ type: "error", text: error.response?.data?.message || "OTP verification failed!" });
     }
   };
+
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -94,17 +98,6 @@ const Register = () => {
         {step === 1 && (
           <form onSubmit={sendOtp} className="space-y-4">
             <div>
-              <label className="block mb-1 text-sm">Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg bg-[#0d1117] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your email"
-                required
-              />
-            </div>
-            <div>
               <label className="block mb-1 text-sm">Phone Number</label>
               <input
                 type="tel"
@@ -113,6 +106,19 @@ const Register = () => {
                 className="w-full px-4 py-2 rounded-lg bg-[#0d1117] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Enter your phone number"
                 required
+              />
+              <p className="mt-1 text-xs text-gray-400">
+                Note: OTP will be sent to your phone number
+              </p>
+            </div>
+            <div>
+              <label className="block mb-1 text-sm">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-[#0d1117] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your email"
               />
             </div>
             <button
@@ -125,6 +131,7 @@ const Register = () => {
             </button>
           </form>
         )}
+
 
         {step === 2 && (
           <form onSubmit={verifyOtp} className="space-y-4">

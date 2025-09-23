@@ -7,6 +7,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("password");
   const [otpRequested, setOtpRequested] = useState(false);
@@ -15,11 +16,16 @@ const Login = () => {
   const handlePasswordSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/password", { email, password });
+      const res = await axios.post(
+        "https://cm-backend-production-642e.up.railway.app/login/password",
+        { email, password }
+      );
       if (res.data.success) {
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
-        const clubRes = await axios.get(`https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${res.data.user.id}`);
+        const clubRes = await axios.get(
+          `https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${res.data.user.id}`
+        );
         navigate(clubRes.data ? "/dashboard" : "/");
       } else setMessage({ type: "error", text: "Invalid email or password" });
     } catch (err) {
@@ -31,9 +37,12 @@ const Login = () => {
   const handleRequestOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { phone });
+      const res = await axios.post(
+        "https://cm-backend-production-642e.up.railway.app/login/send/otp",
+        { phone }
+      );
       if (res.data.success) {
-        setMessage({ type: "success", text: "OTP sent successfully! Check your email." });
+        setMessage({ type: "success", text: "OTP sent successfully! Check your phone." });
         setOtpRequested(true);
       } else setMessage({ type: "error", text: res.data.message || "Failed to send OTP" });
     } catch (err) {
@@ -45,7 +54,10 @@ const Login = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { phone, otp });
+      const res = await axios.post(
+        "https://cm-backend-production-642e.up.railway.app/login/verify/otp",
+        { phone, otp }
+      );
       if (res.data.success) {
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
@@ -73,10 +85,11 @@ const Login = () => {
         {/* Tabs */}
         <div className="flex justify-center mb-6 space-x-4">
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "password"
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              selectedMethod === "password"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-              }`}
+            }`}
             onClick={() => {
               setSelectedMethod("password");
               setMessage({ type: "", text: "" });
@@ -86,25 +99,27 @@ const Login = () => {
             Password
           </button>
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "otp"
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              selectedMethod === "otp"
                 ? "bg-blue-600 text-white"
                 : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-              }`}
+            }`}
             onClick={() => {
               setSelectedMethod("otp");
               setMessage({ type: "", text: "" });
               setOtpRequested(false);
             }}
           >
-            Email OTP
+            Phone OTP
           </button>
         </div>
 
         {/* Message */}
         {message.text && (
           <div
-            className={`mb-4 p-3 rounded-md text-center font-medium ${message.type === "success" ? "bg-green-600" : "bg-red-600"
-              }`}
+            className={`mb-4 p-3 rounded-md text-center font-medium ${
+              message.type === "success" ? "bg-green-600" : "bg-red-600"
+            }`}
           >
             {message.text}
           </div>
@@ -149,15 +164,18 @@ const Login = () => {
             {!otpRequested ? (
               <form onSubmit={handleRequestOtp} className="space-y-5">
                 <div>
-                  <label className="block mb-2 text-sm">Email</label>
+                  <label className="block mb-2 text-sm">Phone Number</label>
                   <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full px-4 py-2 rounded-lg bg-[#0d1117] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter your email"
+                    placeholder="Enter your phone number"
                     required
                   />
+                  <p className="mt-1 text-xs text-gray-400">
+                    Note: OTP will be sent to your phone number
+                  </p>
                 </div>
                 <button
                   type="submit"
@@ -169,10 +187,10 @@ const Login = () => {
             ) : (
               <form onSubmit={handleVerifyOtp} className="space-y-5">
                 <div>
-                  <label className="block mb-2 text-sm">Email</label>
+                  <label className="block mb-2 text-sm">Phone Number</label>
                   <input
-                    type="email"
-                    value={email}
+                    type="tel"
+                    value={phone}
                     readOnly
                     className="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-gray-400"
                   />
