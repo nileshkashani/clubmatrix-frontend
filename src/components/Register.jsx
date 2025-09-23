@@ -21,7 +21,7 @@ const Register = () => {
     setMessage({ type: "", text: "" });
 
     try {
-      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { email });
+      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { phone });
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         setStep(2);

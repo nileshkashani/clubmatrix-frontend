@@ -31,7 +31,7 @@ const Login = () => {
   const handleRequestOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { email });
+      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { phone });
       if (res.data.success) {
         setMessage({ type: "success", text: "OTP sent successfully! Check your email." });
         setOtpRequested(true);
@@ -45,7 +45,7 @@ const Login = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { email, otp });
+      const res = await axios.post("https://cm-backend-production-642e.up.railway.app/login/verify/otp", { phone, otp });
       if (res.data.success) {
         localStorage.setItem("user", JSON.stringify(res.data));
         localStorage.setItem("isAuthenticated", "true");
