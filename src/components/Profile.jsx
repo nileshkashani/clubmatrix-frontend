@@ -8,6 +8,7 @@ const Profile = () => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    console.log(storedUser);
     if (storedUser) {
       setUser(JSON.parse(storedUser).user);
       setLoading(false);

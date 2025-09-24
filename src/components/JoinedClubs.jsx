@@ -22,7 +22,8 @@ const JoinedClubs = () => {
           setLoading(false);
           return;
         }
-        const email = user.user.email; // ✅ access nested user object
+        const email = user.user.email;
+        console.log(email, user.email) // ✅ access nested user object
 
 
         const res = await axios.get("https://cm-backend-production-642e.up.railway.app/member/email", {
