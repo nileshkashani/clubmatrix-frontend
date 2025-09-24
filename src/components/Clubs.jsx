@@ -22,7 +22,7 @@ const Clubs = () => {
 
         if (user) {
           const joinedRes = await axios.get("https://cm-backend-production-642e.up.railway.app/member/email", {
-            params: { email: user.user.email },
+            params: { email: user.email },
           });
           if (joinedRes.data.success) {
             const memberArray = Array.isArray(joinedRes.data.data)

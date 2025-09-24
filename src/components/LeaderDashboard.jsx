@@ -13,7 +13,7 @@ const LeaderDashboard = () => {
   const [message, setMessage] = useState({ type: "", text: "" });
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const leaderId = user.user.id;
+  const leaderId = user.id;
 
   // Tabs handlers
   const handleTabClubDetails = async () => {

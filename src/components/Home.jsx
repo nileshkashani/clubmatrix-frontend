@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Tutorial from './Tutorial';
+import About from './About'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -15,12 +16,12 @@ const Home = () => {
       try {
         const user = JSON.parse(localStorage.getItem("user"));
 
-        if (!user?.user?.id) {
+        if (!user?.id) {
           setIsClubLeader(false);
           return;
         }
 
-        const leaderId = user.user.id;
+        const leaderId = user.id;
         const res = await axios.get(`https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${leaderId}`);
 
         if (res.data) {
@@ -102,6 +103,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      <About/>
      
       <Tutorial />
 

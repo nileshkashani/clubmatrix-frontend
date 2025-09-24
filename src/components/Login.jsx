@@ -22,7 +22,8 @@ const Login = () => {
         { email, password }
       );
       if (res.data.success) {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        console.log(res.data.user)
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("isAuthenticated", "true");
         const clubRes = await axios.get(
           `https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${res.data.user.id}`
@@ -65,8 +66,10 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("isAuthenticated", "true");
 
-        console.log("User verified:", res.data.user);
-        navigate("/");
+        const clubRes = await axios.get(
+          `https://cm-backend-production-642e.up.railway.app/club/get/by/leader/${res.data.user.id}`
+        );
+        navigate(clubRes.data ? "/dashboard" : "/");
       } else {
         setMessage({ type: "error", text: res.data.message || "Invalid OTP" });
       }

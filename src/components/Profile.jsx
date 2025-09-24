@@ -10,7 +10,7 @@ const Profile = () => {
     const storedUser = localStorage.getItem("user");
     console.log(storedUser);
     if (storedUser) {
-      setUser(JSON.parse(storedUser).user);
+      setUser(JSON.parse(storedUser));
       setLoading(false);
     } else {
       const fetchUser = async () => {
