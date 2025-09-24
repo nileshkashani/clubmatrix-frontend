@@ -1,10 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const steps = [
-  { id: 1, title: "Step 1", description: "Goto your browser and hit url: 'https://clubmatrix.vercel.app'", image: "/unnamed.png" },
-  { id: 2, title: "Step 2", description: "Description for step 2", image: "/path/to/image2.png" },
-  { id: 3, title: "Step 3", description: "Description for step 3", image: "/home.png" },
-  { id: 4, title: "Step 4", description: "Description for step 4", image: "/path/to/image4.png" },
+  { id: 1, title: "Step 1", description: "upon hitting 'https://clubmatrix.vercel.app' on browser, you are on home page.", image: "/1.png" },
+  { id: 2, title: "Step 2", description: "Description for step 2", image: "/2.png" },
+  { id: 3, title: "Step 3", description: "Description for step 3", image: "/3.png" },
+  { id: 4, title: "Step 4", description: "Description for step 4", image: "/4.png" },
+  { id: 5, title: "Step 4", description: "Description for step 5", image: "/7.png" },
+  { id: 6, title: "Step 4", description: "Description for step 6", image: "/5.png" },
+  { id: 7, title: "Step 4", description: "Description for step 6", image: "/12.png" },
+  { id: 8, title: "Step 4", description: "Description for step 7", image: "/6.png" },
+  { id: 9, title: "Step 4", description: "Description for step 8", image: "/13.png" },
+  { id: 11, title: "Step 4", description: "Description for step 8", image: "/8.png" },
+  { id: 12, title: "Step 4", description: "Description for step 8", image: "/14.png" },
+  { id: 13, title: "Step 4", description: "Description for step 8", image: "/9.png" },
+  { id: 14, title: "Step 4", description: "Description for step 8", image: "/10.png" },
 ];
 
 const AUTO_SWITCH_INTERVAL = 4000; // 4 seconds
@@ -39,14 +48,15 @@ const Tutorial = () => {
 
       <div className="flex flex-col items-center space-y-6 w-full">
         {/* Card */}
-        <div className="relative w-full md:w-4/5 lg:w-3/5 bg-[#0d1117] rounded-2xl shadow-lg p-8 flex flex-col items-center min-h-[500px] md:min-h-[550px] lg:min-h-[600px]">
+        <div className="relative w-full md:w-4/5 lg:w-3/5 bg-[#0d1117] rounded-2xl shadow-lg p-8 flex flex-col items-center min-h-52 md:min-h-80 lg:min-h-[600px]">
           <h3 className="text-2xl font-semibold mb-4">{steps[currentIndex].title}</h3>
           {steps[currentIndex].image && (
             <img
               src={steps[currentIndex].image}
-              alt={steps[currentIndex].title}
-              className="w-full h-72 md:h-80 lg:h-96 object-cover rounded-lg shadow mb-4"
+              alt={steps[currentIndex].title} 
+              className="w-auto max-h-[40vh] md:max-h-[70vh] object-contain rounded-lg shadow mb-4"
             />
+
           )}
           <p className="text-gray-300 text-lg mb-6 text-center">{steps[currentIndex].description}</p>
 

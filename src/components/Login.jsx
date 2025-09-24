@@ -14,6 +14,7 @@ const Login = () => {
   const [message, setMessage] = useState({ type: "", text: "" });
 
   const handlePasswordSubmit = async (e) => {
+
     e.preventDefault();
     try {
       const res = await axios.post(
@@ -58,16 +59,23 @@ const Login = () => {
         "https://cm-backend-production-642e.up.railway.app/login/verify/otp",
         { phone, otp }
       );
+
       if (res.data.success) {
-        localStorage.setItem("user", JSON.stringify(res.data));
+        // store only the user object
+        localStorage.setItem("user", JSON.stringify(res.data.user));
         localStorage.setItem("isAuthenticated", "true");
+
+        console.log("User verified:", res.data.user);
         navigate("/");
-      } else setMessage({ type: "error", text: "Invalid OTP" });
+      } else {
+        setMessage({ type: "error", text: res.data.message || "Invalid OTP" });
+      }
     } catch (err) {
       console.error(err);
       setMessage({ type: "error", text: "OTP verification failed. Please try again." });
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0d1117] px-4">
@@ -85,11 +93,10 @@ const Login = () => {
         {/* Tabs */}
         <div className="flex justify-center mb-6 space-x-4">
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              selectedMethod === "password"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "password"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
             onClick={() => {
               setSelectedMethod("password");
               setMessage({ type: "", text: "" });
@@ -99,11 +106,10 @@ const Login = () => {
             Password
           </button>
           <button
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              selectedMethod === "otp"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-all ${selectedMethod === "otp"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+              }`}
             onClick={() => {
               setSelectedMethod("otp");
               setMessage({ type: "", text: "" });
@@ -117,9 +123,8 @@ const Login = () => {
         {/* Message */}
         {message.text && (
           <div
-            className={`mb-4 p-3 rounded-md text-center font-medium ${
-              message.type === "success" ? "bg-green-600" : "bg-red-600"
-            }`}
+            className={`mb-4 p-3 rounded-md text-center font-medium ${message.type === "success" ? "bg-green-600" : "bg-red-600"
+              }`}
           >
             {message.text}
           </div>
@@ -216,6 +221,9 @@ const Login = () => {
             )}
           </>
         )}
+
+
+
 
         {/* Footer link */}
         <p className="mt-6 text-center text-sm text-gray-400">
