@@ -51,7 +51,7 @@ const Tutorial = () => {
   };
 
   return (
-    <section className="w-screen min-h-screen flex flex-col items-center justify-center bg-[#0d1117] text-white px-4 mb-10">
+    <section className="w-screen min-h-screen flex flex-col items-center justify-center bg-[#0d1117] text-white px-4">
       <h2 className="text-3xl md:text-5xl font-extrabold text-center mb-8 tracking-wide mt-10">
         Tutorials
       </h2>
