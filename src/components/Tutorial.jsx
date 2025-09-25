@@ -78,7 +78,7 @@ const Tutorial = () => {
               setCurrentIndex(prev => (prev === 0 ? steps.length - 1 : prev - 1))
             }
           >
-            &larr; Prev
+            &larr;
           </button>
 
           {/* Next button */}
@@ -86,7 +86,7 @@ const Tutorial = () => {
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-full shadow transition"
             onClick={handleNext}
           >
-            Next &rarr;
+            &rarr;
           </button>
         </div>
 
