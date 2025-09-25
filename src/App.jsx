@@ -11,7 +11,7 @@ import JoinedClubs from './components/JoinedClubs';
 import About from './components/About';
 import Features from './components/Features';
 import Guide from './components/Guide';
- 
+import Tutorials from './components/Tutorials';
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -38,6 +38,7 @@ const App = () => {
           <Route path='/about' element={<About />}/>
           <Route path='/features' element = {<Features/>}></Route>
           <Route path='/guide' element = {<Guide/>}></Route>
+<Route path='/tutorials' element = {<Tutorials/>}></Route>
         </Routes>
       </div>
     </Router>
