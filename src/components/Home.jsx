@@ -106,8 +106,6 @@ const Home = () => {
 
       <About/>
      
-      <Tutorial />
-
       <Footer />  
     </div>
   );
