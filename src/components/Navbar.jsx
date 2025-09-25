@@ -80,7 +80,7 @@ const Navbar = () => {
               </>
             ) : (
               <button
-                className="px-4 py-1 text-xl bg-orange-400  hover:bg-orange-500 text-white rounded-md transition-colors duration-300"
+                className="px-4 py-1 text-xl text-white rounded-md transition-colors duration-300"
                 onClick={handleLogout}
               >
                 Logout

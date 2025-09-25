@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#161b22] text-gray-300 py-10 overflow-hidden">
+    <footer className="bg-[#161b22] text-gray-300 py-10 overflow-hidden w-full">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6">
         
         {/* Section 1 - About */}
@@ -34,9 +34,9 @@ const Footer = () => {
           </ul>
         </div>
         {/* Section 4 - Logo */}
-        <div className="flex flex-col items-start md:items-end">
+        <div className="flex flex-col items-start">
           <h2 className="text-2xl font-bold text-white">ClubMatrix</h2>
-          <p className="text-sm mt-2 text-gray-400">© {new Date().getFullYear()} ClubMatrix. All rights reserved.</p>
+          <p className="text-sm mt-2 text-gray-400 text-start">© {new Date().getFullYear()} ClubMatrix. All rights reserved.</p>
           <div className="flex space-x-4 mt-4">
             <a href="https://github.com/nileshkashani" target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaGithub size={20} /></a>
             <a href="https://linkedin.com/in/nilesh-kashani" target="_blank" rel="noopener noreferrer" className="hover:text-white"><FaLinkedin size={20} /></a>
