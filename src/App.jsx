@@ -11,7 +11,7 @@ import JoinedClubs from './components/JoinedClubs';
 import About from './components/About';
 import Features from './components/Features';
 import Guide from './components/Guide';
-import Tutorials from './components/Tutorials';
+import Tutorials from './components/Tutorial';
 
 const App = () => {
   const [user, setUser] = useState(null);
