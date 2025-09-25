@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const steps = [
-  { id: 1, title: "Step 1", description: "upon hitting 'https://clubmatrix.vercel.app' on browser, you are on home page.", image: "/1.png" },
-  { id: 2, title: "Step 2", description: "Description for step 2", image: "/2.png" },
-  { id: 3, title: "Step 3", description: "Description for step 3", image: "/3.png" },
-  { id: 4, title: "Step 4", description: "Description for step 4", image: "/4.png" },
-  { id: 5, title: "Step 4", description: "Description for step 5", image: "/7.png" },
-  { id: 6, title: "Step 4", description: "Description for step 6", image: "/5.png" },
-  { id: 7, title: "Step 4", description: "Description for step 6", image: "/12.png" },
-  { id: 8, title: "Step 4", description: "Description for step 7", image: "/6.png" },
-  { id: 9, title: "Step 4", description: "Description for step 8", image: "/13.png" },
-  { id: 11, title: "Step 4", description: "Description for step 8", image: "/8.png" },
-  { id: 12, title: "Step 4", description: "Description for step 8", image: "/14.png" },
-  { id: 13, title: "Step 4", description: "Description for step 8", image: "/9.png" },
-  { id: 14, title: "Step 4", description: "Description for step 8", image: "/10.png" },
+  { id: 1, description: "upon hitting 'https://clubmatrix.vercel.app' on browser, you are on home page. Click 3 dots on top right corner.", image: "/1.png" },
+  { id: 2, description: "Complete login if you are existing user. Else just signup.", image: "/2.png" },
+  { id: 3, description: "Example login page. Enter email and password to login. Else login using Phone no Otp. If not existing user, click on sign up", image: "/3.png" },
+  { id: 4, title: "Step 4", description: "Example sign up page. fill all the required fields corrected to successfully signup", image: "/4.png" },
+  { id: 5, description: "After successful login/sign up, you must be able to see available clubs by tapping 'Explore Clubs' tab.", image: "/7.png" },
+  { id: 6,  description: "After you click on 'Explore Clubs' tab, you will be able to see joined clubs (if any). Also you will be able to see the available clubs you can join. there is a tab for searching club by name and filtering clubs out according to their category.", image: "/5.png" },
+  { id: 7,  description: "On home page, you can actualy access the clubs that you joined just by tapping 'Joined Clubs' tab.", image: "/12.png" },
+  { id: 8,  description: "you can see the members of joined clubs and announcements which leader of club makes.", image: "/6.png" },
+  { id: 9,  description: "You can also add your own club by tapping 'Add your club' tab on home page.", image: "/13.png" },
+  { id: 11,  description: "After tapping 'Add your club', just fill out all the required fields correctly to make club.", image: "/8.png" },
+  { id: 12,  description: "after club is created, you can see your club option on home screen from where you can have access to your club.", image: "/14.png" },
+  { id: 13,  description: "you can manage 4 tabs after you click on 'your club'.", image: "/9.png" },
+  { id: 14,  description: "you can manage club join requests which will arrive when any other member tries to join your club. Also you can manage club members under 'Club members' tab. And the most important, you can make announcements that will be visible to Club members by tapping 'Announcement's' tab.", image: "/10.png" },
 ];
 
 const AUTO_SWITCH_INTERVAL = 4000; // 4 seconds

@@ -9,6 +9,8 @@ import AddClub from './components/AddClub';
 import LeaderDashboard from './components/LeaderDashboard';
 import JoinedClubs from './components/JoinedClubs';
 import About from './components/About';
+import Features from './components/Features';
+import Guide from './components/Guide';
  
 
 const App = () => {
@@ -34,9 +36,9 @@ const App = () => {
           <Route path='/joined-clubs' element={<JoinedClubs />} />
           <Route path="/dashboard" element={<LeaderDashboard />} />
           <Route path='/about' element={<About />}/>
+          <Route path='/features' element = {<Features/>}></Route>
+          <Route path='/guide' element = {<Guide/>}></Route>
         </Routes>
-        
-        
       </div>
     </Router>
   );

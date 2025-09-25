@@ -8,34 +8,31 @@ const Footer = () => {
         
         {/* Section 1 - About */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">About</h3>
+          <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="/about" className="hover:text-white">About Us</a></li>
-            <li><a href="/contact" className="hover:text-white">Contact</a></li>
-            <li><a href="/help" className="hover:text-white">Help</a></li>
+            <li><a href="/features" className="hover:text-white">Features</a></li>
             <li><a href="/guide" className="hover:text-white">Guide</a></li>
           </ul>
         </div>
 
         {/* Section 2 - Visit */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Visit</h3>
+          <h3 className="text-xl font-semibold mb-3">Visit</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="https://yourportfolio.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">Portfolio</a></li>
-            <li><a href="https://github.com/yourgithub" target="_blank" rel="noopener noreferrer" className="hover:text-white">GitHub</a></li>
-            <li><a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a></li>
+            <li><a href="https://nileshkashani.github.io/portfolio" target="_blank" rel="noopener noreferrer" className="hover:text-white">Developer's Portfolio</a></li>
           </ul>
         </div>
 
-        {/* Section 3 - Follow */}
+
+        {/* Section 3 - Contact */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
+          <h3 className="text-xl font-semibold mb-3">Contact us</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="https://instagram.com/yourdev" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a></li>
-            <li><a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener noreferrer" className="hover:text-white">LinkedIn</a></li>
+            <li><b>Email </b> clubmatrix.team@gmail.com</li>
+            <li><b>Phone</b> +62 857-6363-3378</li>
           </ul>
         </div>
-
         {/* Section 4 - Logo */}
         <div className="flex flex-col items-start md:items-end">
           <h2 className="text-2xl font-bold text-white">ClubMatrix</h2>

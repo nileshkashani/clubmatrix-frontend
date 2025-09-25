@@ -66,13 +66,13 @@ const Navbar = () => {
             {!login ? (
               <>
                 <button
-                  className="px-4 py-1 text-xl bg-blue-600 text-white rounded-md hover:bg-white/20 transition-colors duration-300"
+                  className="px-4 py-1 text-xl bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-300"
                   onClick={handleLogin}
                 >
                   Login
                 </button>
                 <button
-                  className="px-4 py-1 text-xl bg-blue-600 text-gray-300 rounded-md hover:text-white transition-colors duration-300"
+                  className="px-4 py-1 text-xl text-gray-300 rounded-md hover:text-white transition-colors duration-300"
                   onClick={handleSignup}
                 >
                   Sign Up
@@ -80,7 +80,7 @@ const Navbar = () => {
               </>
             ) : (
               <button
-                className="px-4 py-1 text-xl bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors duration-300"
+                className="px-4 py-1 text-xl bg-orange-400  hover:bg-orange-500 text-white rounded-md transition-colors duration-300"
                 onClick={handleLogout}
               >
                 Logout
