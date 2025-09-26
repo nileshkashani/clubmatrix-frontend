@@ -40,7 +40,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://cm-backend-production-642e.up.railway.app/login/verify/otp",
+        "https://cm-backend-production-642e.up.railway.app/login/verify/otp/for/register",
         { phone, otp }   // <-- use phone + otp
       );
       if (response.data.success) {
