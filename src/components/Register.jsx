@@ -10,7 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -19,13 +19,13 @@ const Register = () => {
     if (isSendingOtp) return;
     setIsSendingOtp(true);
     setMessage({ type: "", text: "" });
-
     try {
-      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { phone });
+      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/send/otp", { phoneNo: phoneNo.trim() });
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
         setStep(2);
       } else {
+        console.log("error")
         setMessage({ type: "error", text: response.data.message });
       }
     } catch (error) {
@@ -41,7 +41,7 @@ const Register = () => {
     try {
       const response = await axios.post(
         "https://cm-backend-production-642e.up.railway.app/login/verify/otp/for/register",
-        { phone, otp }   // <-- use phone + otp
+        { phoneNo, otp }  
       );
       if (response.data.success) {
         setMessage({ type: "success", text: response.data.message });
@@ -55,23 +55,36 @@ const Register = () => {
   };
 
 
-  const registerUser = async (e) => {
-    e.preventDefault();
-    setMessage({ type: "", text: "" });
+const registerUser = async (e) => {
+  e.preventDefault();
+  setMessage({ type: "", text: "" });
 
-    try {
-      const response = await axios.post("https://cm-backend-production-642e.up.railway.app/login/register", { name, email, password, phone });
-      if (response.data.success) {
-        setMessage({ type: "success", text: response.data.message });
-        localStorage.setItem("isAuthenticated", "true");
-        navigate("/");
-      } else {
-        setMessage({ type: "error", text: response.data.message });
-      }
-    } catch (error) {
-      setMessage({ type: "error", text: error.response?.data?.message || "Registration failed!" });
+  try {
+    console.log(phoneNo)
+    const response = await axios.post(
+      "https://cm-backend-production-642e.up.railway.app/login/register",
+      { name, email, password, phoneNo }
+    );
+
+    if (response.data.success) {
+      setMessage({ type: "success", text: response.data.message });
+
+      console.log(response.data); 
+      localStorage.setItem("user", JSON.stringify(response.data.user)); 
+      localStorage.setItem("isAuthenticated", "true");
+
+      navigate("/");
+    } else {
+      setMessage({ type: "error", text: response.data.message });
     }
-  };
+  } catch (error) {
+    setMessage({
+      type: "error",
+      text: error.response?.data?.message || "Registration failed!",
+    });
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#0d1117] px-4">
@@ -98,17 +111,17 @@ const Register = () => {
         {step === 1 && (
           <form onSubmit={sendOtp} className="space-y-4">
             <div>
-              <label className="block mb-1 text-sm">Phone Number</label>
+              <label className="block mb-1 text-sm">phone Number</label>
               <input
                 type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={phoneNo}
+                onChange={(e) => setPhoneNo(e.target.value)}
                 className="w-full px-4 py-2 rounded-lg bg-[#0d1117] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your phone number"
+                placeholder="Enter your phoneNo number"
                 required
               />
               <p className="mt-1 text-xs text-gray-400">
-                Note: OTP will be sent to your phone number
+                Note: OTP will be sent to your phoneNo number
               </p>
             </div>
             <div>

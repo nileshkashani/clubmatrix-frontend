@@ -14,6 +14,7 @@ const LeaderDashboard = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
   const leaderId = user.id;
+  console.log(leaderId)
 
   // Tabs handlers
   const handleTabClubDetails = async () => {
@@ -51,6 +52,7 @@ const LeaderDashboard = () => {
         `https://cm-backend-production-642e.up.railway.app/club/members/leader/${leaderId}`
       );
       setMembers(res.data.data || []);
+      console.log(res.data.data);
     } catch (err) {
       console.error(err);
       setMembers([]);
@@ -153,8 +155,8 @@ const LeaderDashboard = () => {
               key={tab.key}
               onClick={tab.handler}
               className={`flex items-center w-full p-2 rounded-md transition ${activeTab === tab.key
-                  ? "bg-blue-600 text-white"
-                  : "hover:bg-blue-700/30 text-gray-200"
+                ? "bg-blue-600 text-white"
+                : "hover:bg-blue-700/30 text-gray-200"
                 }`}
             >
               <tab.icon className="w-5 h-5 mr-2" />
@@ -225,26 +227,28 @@ const LeaderDashboard = () => {
           </div>
         )}
 
-        {activeTab === "members" && (
-          <div className="bg-[#161b22] p-6 rounded-2xl shadow-md space-y-2">
-            <h2 className="text-2xl font-bold mb-4">Club Members</h2>
-            {members.length === 0 ? (
-              <p className="text-gray-400">No members in your club.</p>
-            ) : (
-              members.map((m) => (
-                <div key={m.memberId} className="flex justify-between items-center p-2 border-b border-gray-700">
-                  <span>{m.memberName || "Unnamed Member"}</span>
-                  <button
-                    className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700"
-                    onClick={() => handleRemove(m.memberId)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))
+        {members.map((m, idx) => (
+          <div
+            key={m.memberId}
+            className="flex justify-between items-center p-2 border-b border-gray-700"
+          >
+            <span>
+              {m.memberName || "Unnamed Member"}{" "}
+              {idx === 0 && <span className="text-sm text-blue-400">(Leader)</span>}
+            </span>
+
+            {idx !== 0 && (
+              <button
+                className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700"
+                onClick={() => handleRemove(m.memberId)}
+              >
+                Remove
+              </button>
             )}
           </div>
-        )}
+        ))}
+
+
 
         {activeTab === "announcements" && (
           <>

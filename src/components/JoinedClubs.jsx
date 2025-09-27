@@ -53,15 +53,25 @@ const JoinedClubs = () => {
   }, []);
 
 
+
   useEffect(() => {
     if (!selectedClub) return;
 
     const fetchClubData = async () => {
       try {
+        const user = JSON.parse(localStorage.getItem("user"));
+        const leaderId = user?.id;
+
         const membersRes = await axios.get(
           `https://cm-backend-production-642e.up.railway.app/member/club/${selectedClub.id}`
         );
-        setClubMembers(membersRes.data.data || []);
+
+        const membersWithRole = (membersRes.data.data || []).map((m) => ({
+          ...m,
+          isLeader: Number(m.club.leaderId) === Number(selectedClub.leaderId),
+        }));
+
+        setClubMembers(membersWithRole);
 
         const announcementsRes = await axios.get(
           `https://cm-backend-production-642e.up.railway.app/announcement/get/all/${selectedClub.id}`
@@ -78,7 +88,8 @@ const JoinedClubs = () => {
     fetchClubData();
   }, [selectedClub]);
 
-  const handleSelectClub = async (club) => {
+
+  const handleSelectClub = (club) => {
     setSelectedClub(club);
   };
 
@@ -156,17 +167,21 @@ const JoinedClubs = () => {
                 {clubMembers.length === 0 ? (
                   <p className="text-gray-400">No members in this club.</p>
                 ) : (
-                  clubMembers.map((m) => (
+                  clubMembers.map((m, idx) => (
                     <div
                       key={m.memberId}
                       className="flex justify-between items-center p-2 border-b border-gray-700"
                     >
-                      <span>{m.memberName || "Unnamed Member"}</span>
+                      <span>
+                        {m.memberName || "Unnamed Member"}{" "}
+                        {idx === 0 && <span className="text-sm text-blue-400">(Leader)</span>}
+                      </span>
                     </div>
                   ))
                 )}
               </div>
             </div>
+
 
             <div className="bg-[#161b22] rounded-2xl shadow-md p-6">
               <h3 className="text-xl font-semibold mb-2">Announcements</h3>

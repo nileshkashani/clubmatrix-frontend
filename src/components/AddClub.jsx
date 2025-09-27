@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 const AddClub = () => {
   const [clubName, setClubName] = useState("");
   const [description, setDescription] = useState("");
-  const [membershipType, setMembershipType] = useState("Open");
   const [contactEmail, setContactEmail] = useState("");
   const [clubCategory, setClubCategory] = useState("");
   const [message, setMessage] = useState(null); // { type: 'success'|'error', text: '' }
@@ -15,7 +14,10 @@ const AddClub = () => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      const leaderId = user.user.id;
+      const leaderId = user.id;
+      localStorage.setItem("leaderId", leaderId);
+
+      console.log(leaderId);
 
       const clubData = {
         clubName,
@@ -34,13 +36,15 @@ const AddClub = () => {
       const newClub = clubRes.data.data;
 
       const userLogin = {
-        name: user.user.name,
-        email: user.user.email,
-        phoneNo: user.user.phone,
-        address: user.user.address || "",
+        name: user.name,
+        email: user.email,
+        phoneNo: user.phone,
+        address: user.address || "",
       };
 
       await axios.post(`https://cm-backend-production-642e.up.railway.app/member/add/${newClub.id}`, userLogin);
+
+      localStorage.setItem("leaderId", leaderId);
 
       setMessage({ type: "success", text: "Club created and leader added successfully!" });
 
@@ -105,18 +109,6 @@ const AddClub = () => {
               className="w-full border border-gray-600 bg-[#0d1117] px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
-          </div>
-
-          <div>
-            <label className="block mb-1">Membership Type</label>
-            <select
-              value={membershipType}
-              onChange={(e) => setMembershipType(e.target.value)}
-              className="w-full border border-gray-600 bg-[#0d1117] px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="Open">Open</option>
-              <option value="Closed">Closed</option>
-            </select>
           </div>
 
           <div>

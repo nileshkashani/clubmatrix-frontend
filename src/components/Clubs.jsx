@@ -15,29 +15,38 @@ const Clubs = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    const userData = user;
+    console.log(userData)
+    if (!userData) return;
+
     const fetchClubs = async () => {
       try {
+        // Fetch all clubs
         const res = await axios.get("https://cm-backend-production-642e.up.railway.app/club/getall");
+        console.log(res)
         setClubs(res.data);
 
-        if (user) {
-          const joinedRes = await axios.get("https://cm-backend-production-642e.up.railway.app/member/email", {
-            params: { email: user.email },
-          });
-          if (joinedRes.data.success) {
-            const memberArray = Array.isArray(joinedRes.data.data)
-              ? joinedRes.data.data
-              : [joinedRes.data.data];
-            const joined = memberArray.map((m) => m.club);
-            setJoinedClubs(joined);
-          }
+        // Fetch clubs joined by the user
+        const joinedRes = await axios.get(
+          "https://cm-backend-production-642e.up.railway.app/member/email",
+          { params: { email: userData.email } }
+        );
+
+        if (joinedRes.data.success) {
+          const memberArray = Array.isArray(joinedRes.data.data)
+            ? joinedRes.data.data
+            : [joinedRes.data.data].filter(Boolean);
+          const joined = memberArray.map((m) => m.club);
+          setJoinedClubs(joined);
         }
       } catch (e) {
         console.error(e);
       }
     };
+
     fetchClubs();
-  }, [user]);
+  }, []); // no dependency to avoid multiple requests
+
 
   const categories = ["all", ...new Set(clubs.map((club) => club.clubCategory))];
 
@@ -59,7 +68,7 @@ const Clubs = () => {
     }
     try {
       const res = await axios.post(
-        `https://cm-backend-production-642e.up.railway.app/join/request/${clubId}/${user.user.id}`
+        `https://cm-backend-production-642e.up.railway.app/join/request/${clubId}/${user.id}`
       );
       setMessages((prev) => ({
         ...prev,
@@ -154,7 +163,7 @@ const Clubs = () => {
           {notJoinedClubs.map((club) => (
             <div
               key={club.id}
-              className="bg-[#161b22] rounded-xl shadow-lg p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform"
+              className="bg-[#161b22] rounded-xl shadow-lg p-6 flex flex-col justify-between transition-transform"
             >
               <div>
                 <h2 className="text-xl font-semibold text-white mb-2">{club.clubName}</h2>
@@ -173,8 +182,8 @@ const Clubs = () => {
                 {messages[club.id] && (
                   <div
                     className={`mb-2 p-2 rounded-md text-sm ${messages[club.id].type === "success"
-                        ? "bg-green-600 text-white"
-                        : "bg-red-600 text-white"
+                      ? "bg-green-600 text-white"
+                      : "bg-red-600 text-white"
                       }`}
                   >
                     {messages[club.id].text}

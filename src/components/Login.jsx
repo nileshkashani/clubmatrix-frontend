@@ -41,7 +41,7 @@ const Login = () => {
     try {
       const res = await axios.post(
         "https://cm-backend-production-642e.up.railway.app/login/send/otp",
-        { phone }
+        { phoneNo: phone.trim() }
       );
       if (res.data.success) {
         setMessage({ type: "success", text: "OTP sent successfully! Check your phone." });
@@ -58,7 +58,7 @@ const Login = () => {
     try {
       const res = await axios.post(
         "https://cm-backend-production-642e.up.railway.app/login/verify/otp",
-        { phone, otp }
+        { phoneNo: phone.trim(), otp }
       );
 
       if (res.data.success) {
@@ -75,7 +75,15 @@ const Login = () => {
       }
     } catch (err) {
       console.error(err);
-      setMessage({ type: "error", text: "OTP verification failed. Please try again." });
+
+      let errorText = "Something went wrong";
+      if (err.response?.data?.message) {
+        errorText = err.response.data.message; // backend-provided error
+      } else if (err.message) {
+        errorText = err.message; // network or CORS error
+      }
+
+      setMessage({ type: "error", text: errorText });
     }
   };
 
