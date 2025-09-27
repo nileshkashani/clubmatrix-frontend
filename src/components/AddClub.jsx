@@ -22,7 +22,6 @@ const AddClub = () => {
       const clubData = {
         clubName,
         description,
-        membershipType,
         contactEmail,
         clubCategory,
         leaderId,
@@ -54,7 +53,6 @@ const AddClub = () => {
 
       setClubName("");
       setDescription("");
-      setMembershipType("Open");
       setContactEmail("");
       setClubCategory("");
     } catch (err) {
